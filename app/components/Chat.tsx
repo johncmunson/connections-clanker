@@ -100,8 +100,8 @@ export default function Chat() {
     },
   });
 
-  // PROBLEM: Mobile browsers spuriously show an error widget when you
-  //          the tab or browser is backgrounded and then foregrounded again:
+  // PROBLEM: Mobile browsers spuriously show an error widget when the
+  //          tab or browser is backgrounded and then foregrounded again:
   //          "Error: There was an error while generating the assistant's response."
   //
   // THESIS: Mobile browsers kill streaming connections on visibility change,
