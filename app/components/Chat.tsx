@@ -41,6 +41,7 @@ export default function Chat() {
   const { resolvedTheme, setTheme } = useTheme();
   const isDark = resolvedTheme === "dark";
   const [placeholder, setPlaceholder] = useState("Start connecting...");
+  const [debugError, setDebugError] = useState<string | null>(null);
   const lastIndexRef = useRef<number | null>(null);
 
   const handleResponseStart = useCallback(() => {
@@ -51,8 +52,14 @@ export default function Chat() {
     setPlaceholder(message);
   }, []);
 
+  const handleError = useCallback((event: { error: Error }) => {
+    console.error("[ChatKit Error]", event.error.message, event.error);
+    setDebugError(`${event.error.message}\n\n${event.error.stack ?? ""}`);
+  }, []);
+
   const { control } = useChatKit({
     onResponseStart: handleResponseStart,
+    onError: handleError,
     api: {
       async getClientSecret(existing) {
         if (existing) {
@@ -100,5 +107,33 @@ export default function Chat() {
     },
   });
 
-  return <ChatKit control={control} />;
+  return (
+    <>
+      <ChatKit control={control} />
+      {debugError && (
+        <div
+          onClick={() => setDebugError(null)}
+          style={{
+            position: "fixed",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            background: "rgba(255,0,0,0.9)",
+            color: "white",
+            padding: "12px",
+            fontSize: "11px",
+            whiteSpace: "pre-wrap",
+            wordBreak: "break-all",
+            zIndex: 99999,
+            maxHeight: "40vh",
+            overflow: "auto",
+          }}
+        >
+          <strong>ChatKit Error (tap to dismiss):</strong>
+          {"\n"}
+          {debugError}
+        </div>
+      )}
+    </>
+  );
 }
