@@ -1,4 +1,4 @@
-- This is a NextJS app router project that utilizes `@openai/chatkit-react`
+- This is a NextJS app router project that utilizes `@openai/chatkit-react`, which inserts an iFrame into the page
 - Always prefer pnpm over npm. You should never run npm or npx, use pnpm equivalents instead.
 - After implementing code, run `pnpm lint` to ensure you haven't introduced any lint errors
 - You never need to start a dev server, one will already be running on port 3000 for you
