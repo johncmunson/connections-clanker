@@ -85,7 +85,7 @@ export default function Chat() {
       enabled: true,
       title: {
         enabled: true,
-        text: "Connections",
+        text: "Connections Clanker",
       },
       rightAction: {
         icon: isDark ? "dark-mode" : "light-mode",
