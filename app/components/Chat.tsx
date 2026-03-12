@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { ChatKit, useChatKit } from "@openai/chatkit-react";
 import { useTheme } from "next-themes";
 
@@ -57,7 +57,7 @@ export default function Chat() {
     setDebugError(`${event.error.message}\n\n${event.error.stack ?? ""}`);
   }, []);
 
-  const { control } = useChatKit({
+  const { control, fetchUpdates } = useChatKit({
     onResponseStart: handleResponseStart,
     onError: handleError,
     api: {
@@ -104,6 +104,20 @@ export default function Chat() {
       greeting: "Make four groups of four!",
     },
   });
+
+  // Re-sync conversation state when returning from a background app switch.
+  // Mobile browsers kill streaming connections on visibility change, which
+  // causes ChatKit to show a spurious error widget.
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
+        fetchUpdates();
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () =>
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+  }, [fetchUpdates]);
 
   return (
     <>
