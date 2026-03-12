@@ -62,9 +62,7 @@ export default function Chat() {
     onError: handleError,
     api: {
       async getClientSecret(existing) {
-        if (existing) {
-          // Refresh: re-fetch a new session
-        }
+        if (existing) return existing;
 
         const res = await fetch("/api/chatkit/session", {
           method: "POST",
