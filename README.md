@@ -13,6 +13,7 @@ A NYTimes Connections clone, in chatbot format. Basically, an excuse to take [Ch
   - Limited customization capabilities
   - High degree of vendor lock-in
   - Very unstable on mobile (dropped streaming connections that don't reconnect)
+  - iFrames are yucky and lame
   - Recommended Alternative: [Vercel Chatbot template](https://chatbot.ai-sdk.dev/)
 
 ---
