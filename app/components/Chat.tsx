@@ -4,27 +4,13 @@ import { useState, useCallback, useEffect, useRef } from "react";
 import { ChatKit, useChatKit } from "@openai/chatkit-react";
 import { useTheme } from "next-themes";
 
-const TRASH_TALK_AND_HELPFUL_COMMANDS = [
+const COMPOSER_HINTS = [
   "Shuffle the board...",
   "What are the rules...",
   "Let's start a new game...",
-  "Ask for a hint...",
+  "Give me a hint...",
   "Print the current board...",
   "Show me the current game state...",
-  "That all you got?",
-  "My grandma solves faster...",
-  "Still thinking? Wow...",
-  "I've seen snails group faster...",
-  "Bold strategy. Let's see how it plays out...",
-  "You sure about that?",
-  "Tick tock, genius...",
-  "Even a coin flip would be faster...",
-  "I'm not mad, just disappointed...",
-  "Try using your brain this time...",
-  "Connections won't solve themselves... or will they?",
-  "Go ahead, guess again. I dare you...",
-  "You call that a guess?",
-  "This is painful to watch...",
 ];
 
 function getRandomComposerPlaceholderText(
@@ -32,15 +18,15 @@ function getRandomComposerPlaceholderText(
 ): [string, number] {
   let index: number;
   do {
-    index = Math.floor(Math.random() * TRASH_TALK_AND_HELPFUL_COMMANDS.length);
-  } while (index === lastIndex && TRASH_TALK_AND_HELPFUL_COMMANDS.length > 1);
-  return [TRASH_TALK_AND_HELPFUL_COMMANDS[index], index];
+    index = Math.floor(Math.random() * COMPOSER_HINTS.length);
+  } while (index === lastIndex && COMPOSER_HINTS.length > 1);
+  return [COMPOSER_HINTS[index], index];
 }
 
 export default function Chat() {
   const { resolvedTheme, setTheme } = useTheme();
   const isDark = resolvedTheme === "dark";
-  const [placeholder, setPlaceholder] = useState("Start connecting...");
+  const [placeholder, setPlaceholder] = useState("Let's start a new game...");
   const lastIndexRef = useRef<number | null>(null);
 
   const handleResponseStart = useCallback(() => {
