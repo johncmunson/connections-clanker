@@ -7,6 +7,7 @@ A NYTimes Connections clone, in chatbot format. Basically, an excuse to take [Ch
   - Cycles prohibited
   - Docs are very underwhelming and sparse
   - Common Expression Language (CEL) is incredibly limiting
+  - Lots of small bugs that really slow you down
   - Recommended Alternative: [n8n](https://n8n.io/)
 
 - ChatKit is fine I guess. You can get up and running quickly with a chat interface, but...
