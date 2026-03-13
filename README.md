@@ -26,6 +26,7 @@ A NYTimes Connections clone, in chatbot format. Basically, an excuse to take [Ch
 #### Roadmap
 
 - Generate game boards ahead of time and persist them somewhere (GitHub Gists would probably work) so that the user doesn't have to wait a long time to start playing
+- Persisted conversations
 - Game of the day
 - Historical stats
 - Login with Google
